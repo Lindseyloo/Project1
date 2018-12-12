@@ -4,9 +4,91 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Shoplo</title>
 </head>
 <body>
-    Hello
+    <nav class="navbar justify-content-between">
+        <a class="navbar-brand" href="#">
+            <img src="/docs/4.0/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top"
+                alt="">
+            listlo
+        </a>
+        <form class="form-inline">
+            <input class="form-control mr-sm-2" type="search" placeholder="zip code" aria-label="Add">
+            <button class="btn" type="submit">Add</button>
+        </form>
+    </nav>
+    <br>
+    <h3>Add your item in the space below to see which store has the lowest price near you!</h3>
+    <div class="container">
+        <br>
+        <div class="card" style="border: 12px solid #F68B6B">
+            <span class="block-example border border-light"></span>
+            <div class="card-header"><i class="fa fa-list-alt"></i>
+                <form>
+                    <div class="form-group">
+                        <label for="item-1"></label>
+                        <input type="text" class="form-control" id="item-1" placeholder="+ add item">
+                    </div>
+                    <!-- <div class="form-group">
+                        <label for="item-2"></label>
+                        <input type="text" class="form-control" id="item-2" placeholder="+ add item">
+                    </div>
+                    <div class="form-group">
+                        <label for="item-3"></label>
+                        <input type="text" class="form-control" id="item-3" placeholder="+ add item">
+                    </div>
+                    <div class="form-group">
+                        <label for="item-4"></label>
+                        <input type="text" class="form-control" id="item-4" placeholder="+ add item">
+                    </div>
+                    <div class="form-group">
+                        <label for="item-5"></label>
+                        <input type="text" class="form-control" id="item-5" placeholder="+ add item">
+                    </div> -->
+                    <button type="button" id="add-item" class="btn-submit">Submit</button>
+                </form>
+            </div>
+        </div>
+        <br>
+        <div class="card" style="border: 12px solid #F68B6B">
+            <div class="card-header"><i class="fa fa-list-alt"></i> Lowest Price Near You
+                <form>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">Item</th>
+                                <th scope="col">Store</th>
+                                <th scope="col">Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">Apple Airpods</th>
+                                <td>Macys</td>
+                                <td>$139.99</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </form>
+                <br>
+            </div>
+        </div>
+    </div>
+    <br>
+    <footer class="footer">
+        <div class="container">
+            <span class="text">Chelsey Timmerman | Jason Harris | Lindsey Smith </span>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
 </body>
 </html>
