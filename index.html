@@ -45,10 +45,10 @@
         </div>
     </div>
 
-
+    
     <br>
     <h3>Add your item in the space below to see which store has the lowest price near you!</h3>
-
+    
     <div class="container">
         <br>
         <div class="card" style="border: 12px solid #F68B6B">
@@ -57,7 +57,7 @@
                 <form>
                     <div class="form-group">
                         <label for="item-1"></label>
-                        <input type="text" class="form-control" id="item-1" placeholder="+ add item">
+                        <input type="text" class="form-control" id="item" placeholder="+ add item">
                     </div>
                     <!-- <div class="form-group">
                         <label for="item-2"></label>
@@ -86,9 +86,9 @@
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th scope="col">Item</th>
-                                <th scope="col">Store</th>
-                                <th scope="col">Price</th>
+                                <th scope="col" class = "item">Item</th>
+                                <th scope="col" class = "store">Store</th>
+                                <th scope="col" class = "price">Price</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -100,9 +100,11 @@
                         </tbody>
                     </table>
                 </form>
+
                 <br>
             </div>
         </div>
+        <button type="button" id="new-list" class="btn-new-list">Create New List</button>
     </div>
     <br>
 

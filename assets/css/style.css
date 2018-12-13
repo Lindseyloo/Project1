@@ -43,6 +43,18 @@ h3 {
     border-radius: 0.25rem
 }
 
+.btn-new-list {
+    background-color: #008080;
+    color: white;
+    border-radius: 0.25rem
+}
+
+.btn-new-list:hover {
+    background-color: #F68B6B;
+    color: white;
+    border-radius: 0.25rem
+}
+
 .footer {
     width: 100%;
     text-align: center;
