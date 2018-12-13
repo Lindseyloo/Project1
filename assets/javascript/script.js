@@ -1,3 +1,37 @@
+// Initialize Firebase
+var config = {
+//api info will go here
+};
+firebase.initializeApp(config);
+
+var database = firebase.database();
+var zipCode = "";
+var item = [];
+
+var macyItemResult = "";
+var bestbuyItemResult = "";
+var amazonItemResult = "";
+var lowestPrice = "";
+var resultItems = 
+  {
+  item: "",
+  store: "",
+  price: "",
+  }
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+//If user ignores the zipcode input pop up modal to remind them to add zipcode. Function called if adding information in the 
+//
+
+  
 // Get the modal
 var modal = document.getElementById('myModal');
 
@@ -11,9 +45,6 @@ var span = document.getElementsByClassName("close")[0];
 btn.onclick = function() {
   modal.style.display = "block";
 }
-// $(window).on('load',function(){
-//   $('#myModal').modal('show');
-// });
 
 // When the user clicks on <span> (x), close the modal
 span.onclick = function() {
