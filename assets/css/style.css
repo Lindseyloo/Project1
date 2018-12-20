@@ -1,34 +1,52 @@
 .navbar {
     background-color: #008080;
     color: white;
+    height: 60px;
 }
 
 .navbar a {
     color: white;
 }
 
+.navbar a:active {
+    color: #F68B6B;;
+}
 .navbar a:hover {
-    color: white;
+    color:#F68B6B;
 }
 
 body {
     background-color: #1A4A55 !important;
+    padding-top: 60px;
 }
 
-h3 {
+h3, h1, h6 {
     color: white !important;
     text-align: center;
 }
 
 .container-fluid {
     background-color: #F68B6B;
-}
-#logo {
-    margin: 50px;
+    display: flex;
+    justify-content: space-evenly;
 }
 
+#logo {
+    padding: 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+    margin-top: 40px;
+}
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
 #zip-code-block {
-    margin: 50px;
+    margin: 20px;
+    width: 100%;
 }
 .btn {
     background-color: #008080;
@@ -83,7 +101,7 @@ border-radius: 0.25rem
     font-size: 18px;
 }
 
-.footer {
+footer {
     width: 100%;
     text-align: center;
     color: white;
@@ -92,4 +110,32 @@ border-radius: 0.25rem
     height: 60px;
     line-height: 60px;
     background-color: #008080;
+}
+.footer-nav a {
+    display: inline-block;
+    color: white;
+    text-decoration: none;
+}
+
+.footer-nav a:hover {
+    color: #F68B6B;
+}
+
+.footer-nav li {
+    display: inline-block;
+}
+
+.text {
+    color: white;
+}
+
+.text:active {
+    color: #F68B6B;;
+}
+.text:hover {
+    color:#F68B6B;
+}
+
+#title {
+    padding: 5px;
 }
