@@ -6,6 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <!--     Fonts and icons     -->
+    <!-- <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+    integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+    crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+    integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+    crossorigin=""></script> -->
+    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"/>
+    <script src="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest-core.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest-core.css"/>
     <link href='https://fonts.googleapis.com/css?family=Cambo|Lato:400,700' rel='stylesheet' type='text/css'>
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link href="assets/css/fonts/pe-icon-7-stroke.css" rel="stylesheet">
@@ -44,47 +54,13 @@
     <div class="container-fluid">
         <div id="title">
             <br>
-            <h1>View the lowest prices on popular items!</h1>
+            <h1>Get Directions to your low priced item!</h1>
             <br>
         </div>
     </div>
 
     <br>
-    <div class="container">
-        <div class="card-deck">
-            <div class="card">
-                <div class="card-body">
-                    <a class="twitter-timeline" data-lang="en" data-width="300" data-height="260" href="https://twitter.com/AmazonsTopDeals?ref_src=twsrc%5Etfw">Tweets
-                        by AmazonsTopDeals</a>
-                    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-                </div>
-                <div class="card-footer">
-                    <small class="text-muted">Best Buy Deals</small>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-body">
-                    <a class="twitter-timeline" data-lang="en" data-width="300" data-height="260" href="https://twitter.com/BestBuy_Deals?ref_src=twsrc%5Etfw">Tweets
-                        by BestBuy_Deals</a>
-                    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-                </div>
-                <div class="card-footer">
-                    <small class="text-muted">Amazon Deals</small>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-body">
-                    <a class="twitter-timeline" data-lang="en" data-width="300" data-height="260" href="https://twitter.com/DealsDT?ref_src=twsrc%5Etfw">Tweets
-                        by DealsDT</a>
-                    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-                </div>
-                <div class="card-footer">
-                    <small class="text-muted">Top Deals</small>
-                </div>
-            </div>
-        </div>
-    </div>
-    </div>
+    <div id="map"></div>
     <br>
 
     <footer class="footer fixed-bottom">

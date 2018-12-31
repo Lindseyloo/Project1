@@ -35,8 +35,6 @@ var resultItems =
 };
 
 
-
-
 //Best Buy Item URL builder  
 var bestBuyitemURL = {
 
@@ -59,7 +57,6 @@ var bestBuyInStoreURL = {
   show: "&show=products.sku,products.name,products.shortDescription,products.salePrice,products.regularPrice,products.addToCartURL,products.url,products.image,products.customerReviewCount,products.customerReviewAverage,city,country,location,fullPostalCode,services,region",
   responseFormat: "&format=json"
 }
-
 
 
 /*Takes the last items searched and creates "&search=" for every empty character in the users item search
@@ -123,7 +120,7 @@ function BBlocalUserItem() {
         bestbuyItemResult.push(resultItems);
         console.log("script.js-114", bestbuyItemResult);
       };
-
+//Table Results
       var bestBuyItem = bestbuyItemResult[0].item;
       var bestBuyStore = bestbuyItemResult[0].store;
       var bestBuyPrice = bestbuyItemResult[0].price;
@@ -166,7 +163,6 @@ database.ref().on("child_added", function (childSnapshot) {
   console.log(childSnapshot.val().bestBuyPriceThird);
 
 
-
   // displays data to table body
   bestBuyItem = childSnapshot.val().bestBuyItem;
   bestBuyStore = childSnapshot.val().bestBuyStore;
@@ -180,6 +176,22 @@ database.ref().on("child_added", function (childSnapshot) {
 
 
 $("#tableBody").append("<tr><td>" + bestBuyItem + "</td><td>" + bestBuyStore + "</td><td>" + bestBuyPrice + "</td></tr>" + "<tr><td>" + bestBuyItemSecond + "</td><td>"  + bestBuyStoreSecond + "</td><td>" + bestBuyPriceSecond + "</td></tr>" + "<tr><td>" + bestBuyItemThird + "</td><td>"  + bestBuyStoreThird + "</td><td>" + bestBuyPriceThird + "</td><tr>")})
+
+
+// onclick for create new list
+// $("#new-list").on("click", function (event) {
+//   event.preventDefault();
+
+    $("#new-list").on("click", function (event) {
+        $("#tableBody").find("tr:not(:first)").remove();
+    });
+
+// function DeleteRows() {
+//   var rowCount = tableBody.rows.length;
+//   for (var i = rowCount - 1; i > 0; i--) {
+//     tableBody.deleteRow(i);
+//   }
+// }
 
 
 //onclick function that captures the users results and passes them through them
@@ -260,11 +272,111 @@ $("#zip-code-btn").on("click", function (event) {
       userLocationInfo.longitude = response.results[0].geometry.location.lng;
       console.log(userLocationInfo.longitude);
     });
+
 });
 
+//document load clear table
+$(document).ready(function() {  
+  $("#tableBody").find("tr:not(:first)").remove();
+  });
 
+  //modal for when results arent returned
+//   $(document).on('click', '.trigger', function (event) {
+//     event.preventDefault();
+//     if (bestbuyItemResult = undefined)
+//     $('#modal').iziModal('open');
+// });
 
+//library addtion for interactive map
+//mapquest option
+L.mapquest.key = 'zgFKXJ2pWxFRwOSV49ARYwhDCodQh5DK';
+let map = L.mapquest.map('map', {
+  center: [40.760780, -111.891045],
+  layers: L.mapquest.tileLayer('map'),
+  zoom: 14,
+  zoomControl: false
+});
 
+let directionsControl = L.mapquest.directionsControl({
+  className: '',
+  directions: {
+    options: {
+      timeOverage: 25,
+      doReverseGeocode: false,
+    }
+  },
+  directionsLayer: {
+    startMarker: {
+      title: 'Drag to change location',
+      draggable: true,
+      icon: 'marker-start',
+      iconOptions: {
+        size: 'sm'
+      }
+    },
+    endMarker: {
+      draggable: true,
+      title: 'Drag to change location',
+      icon: 'marker-end',
+      iconOptions: {
+        size: 'sm'
+      }
+    },
+    viaMarker: {
+      title: 'Drag to change route'
+    },
+    routeRibbon: {
+      showTraffic: true
+    },
+    alternateRouteRibbon: {
+      showTraffic: true
+    },
+    paddingTopLeft: [450, 20],
+    paddingBottomRight: [180, 20],
+  },
+  startInput: {
+    compactResults: true,
+    disabled: false,
+    location: {},
+    placeholderText: 'Starting point or click on the map...',
+    geolocation: {
+      enabled: true
+    },
+    clearTitle: 'Remove starting point'
+  },
+  endInput: {
+    compactResults: true,
+    disabled: false,
+    location: {},
+    placeholderText: 'Destination',
+    geolocation: {
+      enabled: true
+    },
+    clearTitle: 'Remove this destination'
+  },
+  addDestinationButton: {
+    enabled: true,
+    maxLocations: 10,
+  },
+  routeTypeButtons: {
+    enabled: true,
+  },
+  reverseButton: {
+    enabled: true,
+  },
+  optionsButton: {
+    enabled: true,
+  },
+  routeSummary: {
+    enabled: true,
+    compactResults: false,
+  },
+  narrativeControl: {
+    enabled: true,
+    compactResults: false,
+    interactive: true,
+  }
+}).addTo(map);
 
 
 
@@ -292,4 +404,3 @@ $("#zip-code-btn").on("click", function (event) {
 //   if (event.target == modal) {
 //     modal.style.display = "none";
 
-  //
