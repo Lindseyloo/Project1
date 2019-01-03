@@ -4,50 +4,86 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <title>Shoplo</title>
+    <!--     Fonts and icons     -->
+    <link href='https://fonts.googleapis.com/css?family=Cambo|Lato:400,700' rel='stylesheet' type='text/css'>
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+    <link href="assets/css/fonts/pe-icon-7-stroke.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+
+    <title>listlo</title>
 </head>
+
 <body>
-    <nav class="navbar justify-content-between">
-        <a class="navbar-brand" href="#">
-            <img src="/docs/4.0/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top"
-                alt="">
-            listlo
-        </a>
-        <form class="form-inline">
-            <input class="form-control mr-sm-2" type="search" placeholder="zip code" aria-label="Add">
-            <button class="btn" type="submit">Add</button>
-        </form>
+
+    <nav class="navbar fixed-top navbar-expand-lg">
+        <a href="index.html" class="navbar-brand"><i class="fa fa-list-alt"></i> listlo</a>
+        <!-- <img src="assets/images/listlo.png" width="30" height="30" class="d-inline-block align-top"
+                alt="">  -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="deals.html">Deals</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/creators.html">Creators</a>
+                </li>
+            </ul>
+        </div>
     </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-2-md">
+                <div id="logo">
+                    <img src="assets/images/LLogo.png" height="100" width="100" alt="logo" class="center">
+                </div>
+            </div>
+            <div class="col-5-md">
+                <div id="logo">
+                    <h1>Welcome to Listlo!</h1>
+                    <h5>Get the lowest priced items nearest to you!</h5>
+                </div>
+            </div>
+            <div class="col-5-md">
+                <div class="card" id="zip-code-block" style="background-color:#1A4A55">
+                    <div class="card-header">
+                        <h6>Add your location to get started!</h6>
+                        <form>
+                            <div class="form-group">
+                                <label for="item-1"></label>
+                                <input type="text" class="form-control" id="zip-code" placeholder="add zip code">
+                            </div>
+                            <div class="text-right">
+                                <button type="button" id="zip-code-btn" class="btn">Add</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <br>
     <h3>Add your item in the space below to see which store has the lowest price near you!</h3>
+    <br>
     <div class="container">
-        <br>
         <div class="card" style="border: 12px solid #F68B6B">
             <span class="block-example border border-light"></span>
-            <div class="card-header"><i class="fa fa-list-alt"></i>
+            <div class="card-header">
                 <form>
                     <div class="form-group">
                         <label for="item-1"></label>
-                        <input type="text" class="form-control" id="item-1" placeholder="+ add item">
+                        <input type="text" class="form-control" id="item" placeholder="+ add item">
                     </div>
-                    <!-- <div class="form-group">
-                        <label for="item-2"></label>
-                        <input type="text" class="form-control" id="item-2" placeholder="+ add item">
+                    <div class="text-right">
+                        <button type="button" id="add-item" class="btn-submit">Submit</button>
                     </div>
-                    <div class="form-group">
-                        <label for="item-3"></label>
-                        <input type="text" class="form-control" id="item-3" placeholder="+ add item">
-                    </div>
-                    <div class="form-group">
-                        <label for="item-4"></label>
-                        <input type="text" class="form-control" id="item-4" placeholder="+ add item">
-                    </div>
-                    <div class="form-group">
-                        <label for="item-5"></label>
-                        <input type="text" class="form-control" id="item-5" placeholder="+ add item">
-                    </div> -->
-                    <button type="button" id="add-item" class="btn-submit">Submit</button>
                 </form>
             </div>
         </div>
@@ -58,12 +94,12 @@
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th scope="col">Item</th>
-                                <th scope="col">Store</th>
-                                <th scope="col">Price</th>
+                                <th scope="col" class="item">Item</th>
+                                <th scope="col" class="store">Store</th>
+                                <th scope="col" class="price">Price</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="tableBody">
                             <tr>
                                 <th scope="row">Apple Airpods</th>
                                 <td>Macys</td>
@@ -71,17 +107,33 @@
                             </tr>
                         </tbody>
                     </table>
+                    <div class="text-right">
+                        <button type="button" id="new-list" class="btn">Create New List</button>
+                    </div>
                 </form>
                 <br>
             </div>
         </div>
     </div>
+
     <br>
-    <footer class="footer">
+
+    <!-- <div class="cotainer">
+        <div id="map"></div>
+    </div> -->
+
+    <footer class="footer sticky-bottom">
         <div class="container">
-            <span class="text">Chelsey Timmerman | Jason Harris | Lindsey Smith </span>
+            <div id="ftr-wrap">
+                <ul class="footer-nav auto">
+                    <li><a href="#">Jason Harris</a></li>
+                    <li><a href="#">Chelsey Timmerman</a></li>
+                    <li><a href="#">Lindsey Smith</a></li>
+                </ul>
+            </div>
         </div>
     </footer>
+
     <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
@@ -90,5 +142,8 @@
         crossorigin="anonymous">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
         crossorigin="anonymous"></script>
+    <script type="text/javascript" src="assets/javascript/script.js"></script>
+
 </body>
+
 </html>

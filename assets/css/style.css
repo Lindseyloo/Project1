@@ -1,45 +1,141 @@
 .navbar {
     background-color: #008080;
     color: white;
+    height: 60px;
 }
+
 .navbar a {
     color: white;
 }
-.navbar a:hover {
-    color: white;
+
+.navbar a:active {
+    color: #F68B6B;;
 }
+.navbar a:hover {
+    color:#F68B6B;
+}
+
 body {
     background-color: #1A4A55 !important;
+    padding-top: 60px;
 }
-h3 {
+
+h3, h1, h6 {
     color: white !important;
     text-align: center;
 }
-.card {
-    background-color: white;
-    outline: 6px solid rgba(246,139,107,) !important;
+
+.container-fluid {
+    background-color: #F68B6B;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#logo {
+    padding: 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+    margin-top: 40px;
+}
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+#zip-code-block {
+    margin: 20px;
+    width: 100%;
 }
 .btn {
+    background-color: #008080;
+    color: white;
+    border-radius: 0.25rem;
+}
+
+.btn:hover {
     background-color: #F68B6B;
     color: white;
-    border-radius: 0.25rem
+    border: 3px solid white;
+    border-radius: 0.25rem;
 }
-.btn-submit {
+.btn-zip {
+    background-color: #008080;
+    color: white;
+    border-radius: 0.25rem
+
+}
+.btn-submit, .btn-new-list, .btn-close {
     background-color: #008080;
     color: white;
     border-radius: 0.25rem
 }
-.btn-submit:hover {
+
+.btn-submit:hover, .btn-new-list:hover, .btn-close:hover {
     background-color: #F68B6B;
     color: white;
     border-radius: 0.25rem
 }
-.footer {
+.btn-zip {
+background-color: #008080;
+color: white;
+border-radius: 0.25rem
+}
+
+.btn-zip:hover {
+    background-color: white;
+    color: #F68B6B;
+    border-radius: 0.25rem
+    }
+
+#myBtn {
+    background-color: #F68B6B;
+    color: white;
+    border-radius: 0.25rem
+}
+#add-item-block {
+    padding: 20px;
+}
+.card-header {
+    font-size: 18px;
+}
+
+footer {
     width: 100%;
     text-align: center;
     color: white;
     bottom: 0;
+    margin-bottom: 0px;
     height: 60px;
     line-height: 60px;
     background-color: #008080;
+}
+.footer-nav a {
+    display: inline-block;
+    color: white;
+    text-decoration: none;
+}
+
+.footer-nav a:hover {
+    color: #F68B6B;
+}
+
+.footer-nav li {
+    display: inline-block;
+}
+
+.text {
+    color: white;
+}
+
+.text:active {
+    color: #F68B6B;;
+}
+.text:hover {
+    color:#F68B6B;
+}
+
+#title {
+    padding: 5px;
 }
