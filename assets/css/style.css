@@ -102,10 +102,10 @@ border-radius: 0.25rem
 }
 
 footer {
+    position: absolute; 
     width: 100%;
     text-align: center;
     color: white;
-    bottom: 0;
     margin-bottom: 0px;
     height: 60px;
     line-height: 60px;

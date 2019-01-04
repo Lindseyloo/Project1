@@ -6,8 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <!--     Fonts and icons     -->
-    <!-- <link href="https://unpkg.com/tabulator-tables@4.1.4/dist/css/tabulator.min.css" rel="stylesheet">
-    <script type="text/javascript" src="https://unpkg.com/tabulator-tables@4.1.4/dist/js/tabulator.min.js"></script> -->
     <link rel="stylesheet" href="iziModal.min.css">
     <link href='https://fonts.googleapis.com/css?family=Cambo|Lato:400,700' rel='stylesheet' type='text/css'>
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
@@ -39,7 +37,7 @@
                         <a class="nav-link" href="map.html">Map</a>
                     </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/creators.html">Creators</a>
+                    <a class="nav-link" href="creator.html">Creators</a>
                 </li>
             </ul>
         </div>
@@ -127,27 +125,21 @@
     </div>
 
     <!-- Modal structure -->
-<div id="modal"> <!-- data-iziModal-fullscreen="true"  data-iziModal-title="Welcome"  data-iziModal-subtitle="Subtitle"  data-iziModal-icon="icon-home" -->
-    <p>Please be more specific.</p>
+<div id="modal" class="trigger">Modal> <!-- data-iziModal-fullscreen="true"  data-iziModal-title="Welcome"  data-iziModal-subtitle="Subtitle"  data-iziModal-icon="icon-home" -->
 </div>
- 
-        <!-- <div class="cotainer">
-        <div id="map"></div>
-    </div> -->
 
-        <footer class="footer sticky-bottom">
-            <div class="container">
-                <div id="ftr-wrap">
-                    <ul class="footer-nav auto">
-                        <li><a href="#">Jason Harris</a></li>
-                        <li><a href="#">Chelsey Timmerman</a></li>
-                        <li><a href="#">Lindsey Smith</a></li>
-                    </ul>
-                </div>
+<footer class="footer sticky-bottom">
+        <div class="container">
+            <div id="ftr-wrap">
+                <ul class="footer-nav auto">
+                    <li><a href="https://github.com/jasonharris06">Jason Harris</a></li>
+                    <li><a href="https://github.com/chelstimm">Chelsey Timmerman</a></li>
+                    <li><a href="https://github.com/Lindseyloo">Lindsey Smith</a></li>
+                </ul>
             </div>
-        </footer>
-
-        <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+        </div>
+    </footer>
+        <script src="https://cdnjs.com/libraries/izimodal"></script>
         <script src="https://www.gstatic.com/firebasejs/5.7.0/firebase.js"></script>
         <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
             crossorigin="anonymous"></script>
