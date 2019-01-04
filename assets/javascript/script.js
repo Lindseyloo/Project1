@@ -19,9 +19,10 @@ var userLocationInfo = {
 };
 
 var googleAPIkey = "AIzaSyDyl44m8YtRpjGj7OvGDc0XzLWRbxnc17w"
+var walmartAPIkey = "xew4cg34gdd5d4p9u6uc3azd";
 var itemArray = [""];
 
-var macyItemResult = "";
+var walmartSearch = "";
 var bestbuyItemResult = [];
 var bestBuySearch = "";
 var bestBuyItemSKU = ""
@@ -58,7 +59,6 @@ var bestBuyInStoreURL = {
   responseFormat: "&format=json"
 }
 
-
 /*Takes the last items searched and creates "&search=" for every empty character in the users item search
 * returns the @param bestBuySearch item that is used to build the best buy URL
 */
@@ -67,24 +67,45 @@ function bestBuyKeywordConfig() {
   //console.log(itemArray.length);
   arrayLength = itemArray.length - 1;
   var item = itemArray[arrayLength];
-  console.log(item);
+  
   bestBuySearch = "";
+  for (i = 0; i < item.length; i++) {
+    var itemChar = item.charAt(i);
+   
+    if (itemChar === " ") {
+      bestBuySearch += "&search=";
+     
+    }
+    else {
+      bestBuySearch += itemChar;
+     
+    }
+  }
+
+};
+
+function walmartKeywordConfig() {
+
+  //console.log(itemArray.length);
+  arrayLength = itemArray.length - 1;
+  var item = itemArray[arrayLength];
+  console.log(item);
+  walmartSearch = "";
   for (i = 0; i < item.length; i++) {
     var itemChar = item.charAt(i);
     console.log(itemChar);
     if (itemChar === " ") {
-      bestBuySearch += "&search=";
+      walmartSearch += "+";
       console.log(bestBuySearch);
     }
     else {
-      bestBuySearch += itemChar;
+      walmartSearch += itemChar;
       console.log(bestBuySearch);
     }
   }
-  console.log(bestBuySearch);
+  console.log(walmartSearch);
   console.log(bestBuyitemURL.keyword);
 };
-
 
 
 //Find Best Buy Items in stock based on customers location
@@ -208,7 +229,7 @@ $(".btn-submit").on("click", function (event) {
   itemArray.push(item);
   console.log(itemArray);
   bestBuyKeywordConfig();
-
+  walmartKeywordConfig();
   var queryURL =
     bestBuyitemURL.baseURL +
     bestBuyitemURL.keyword + bestBuySearch + ")" +
@@ -237,11 +258,30 @@ $(".btn-submit").on("click", function (event) {
       console.log(results[0]);
       console.log(bestBuyItemSKU);
       BBlocalUserItem();
+      
     });
 
-  //Waits until the SKU numbers get pulled from the Users Search
-  //setTimeout(function(){ BBlocalUserItem();}, 1000);
+//Walmart item search URL
+var walmartURL = 
+  "https://api.walmartlabs.com/v1/search"
+  +"?query="+ walmartSearch
+  +"&format=json"
+  + "&facet=on"
+  + "&apiKey=" + walmartAPIkey
+  +"&sort=price&order=asc";
+  
+ console.log(walmartURL)   
+  $.ajax({
+      url: walmartURL,
+      method: "GET",
+      
+    })
+      .then(function (response) {
+        var results = response;
+        console.log(results);
+      }); 
 
+  
 });
 console.log(bestBuyItemSKU)
 
@@ -403,4 +443,5 @@ let directionsControl = L.mapquest.directionsControl({
 // window.onclick = function(event) {
 //   if (event.target == modal) {
 //     modal.style.display = "none";
+
 
