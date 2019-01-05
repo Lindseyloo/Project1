@@ -1,4 +1,4 @@
-// Initialize Firebase
+/// Initialize Firebase
 var config = {
   apiKey: "AIzaSyDcte2uBaoWV9plgoh8459pOgT-7ciQ-Bk",
   authDomain: "project-1-3dbd1.firebaseapp.com",
@@ -21,8 +21,8 @@ var userLocationInfo = {
 var googleAPIkey = "AIzaSyDyl44m8YtRpjGj7OvGDc0XzLWRbxnc17w"
 var walmartAPIkey = "xew4cg34gdd5d4p9u6uc3azd";
 var itemArray = [""];
-
 var walmartSearch = "";
+var walmartItemResult = [];
 var bestbuyItemResult = [];
 var bestBuySearch = "";
 var bestBuyItemSKU = ""
@@ -35,6 +35,17 @@ var resultItems =
   price: "",
 };
 
+//Remove previous results from Firebase
+window.onload = removeResults;
+function removeResults() {
+var adaRef = firebase.database().ref();
+adaRef.remove()
+  .then(function() {
+    console.log("Remove succeeded.")
+  })
+  .catch(function(error) {
+    console.log("Remove failed: " + error.message)
+  });
 
 //Best Buy Item URL builder  
 var bestBuyitemURL = {
@@ -64,7 +75,7 @@ var bestBuyInStoreURL = {
 */
 function bestBuyKeywordConfig() {
 
-  //console.log(itemArray.length);
+ 
   arrayLength = itemArray.length - 1;
   var item = itemArray[arrayLength];
   
@@ -86,26 +97,60 @@ function bestBuyKeywordConfig() {
 
 function walmartKeywordConfig() {
 
-  //console.log(itemArray.length);
   arrayLength = itemArray.length - 1;
   var item = itemArray[arrayLength];
-  console.log(item);
+ 
   walmartSearch = "";
   for (i = 0; i < item.length; i++) {
     var itemChar = item.charAt(i);
-    console.log(itemChar);
+    
     if (itemChar === " ") {
       walmartSearch += "+";
-      console.log(bestBuySearch);
+      
     }
     else {
       walmartSearch += itemChar;
-      console.log(bestBuySearch);
+    
     }
   }
-  console.log(walmartSearch);
-  console.log(bestBuyitemURL.keyword);
+
 };
+ 
+function bestPrice() {
+  var bestItem = "";
+  
+  console.log(walmartItemResult[walmartItemResult.length - 1].price);
+  console.log(bestbuyItemResult[bestbuyItemResult.length - 1].price);
+  if (walmartItemResult[walmartItemResult.length - 1].price < bestbuyItemResult[bestbuyItemResult.length - 1].price) {
+    bestItem = (walmartItemResult[walmartItemResult.length - 1]);
+    addtoFirebase(bestItem);
+  };
+};
+function addtoFirebase(bestItem) {
+ 
+  
+  database.ref().push({
+    
+    bestItem: bestItem,
+    
+  });
+
+  database.ref().on("child_added", function (childSnapshot) {
+    bestItem = childSnapshot.val().bestItem;
+    
+
+    
+    console.log(childSnapshot.val().bestItem);
+    $("#tableBody").append("<tr><td>"
+      + bestItem.item + "</td><td>"
+      + bestItem.store + "</td><td>"
+      + bestItem.price + "</td></tr>")
+    
+
+  });
+};
+  //console.log(bestbuyItemResult[bestbuyItemResult.length - 1].price);
+
 
 
 //Find Best Buy Items in stock based on customers location
@@ -126,9 +171,6 @@ function BBlocalUserItem() {
     .then(function (response) {
       console.log(response);
       var results = response.stores[0].products;
-      console.log(response.stores[0].products[0].name)
-      console.log(results);
-
 
       for (i = 0; i < results.length; i++) {
 
@@ -139,7 +181,7 @@ function BBlocalUserItem() {
         };
 
         bestbuyItemResult.push(resultItems);
-        console.log("script.js-114", bestbuyItemResult);
+        console.log("script.js-142", bestbuyItemResult);
       };
 //Table Results
       var bestBuyItem = bestbuyItemResult[0].item;
@@ -152,8 +194,8 @@ function BBlocalUserItem() {
       var bestBuyStoreThird = bestbuyItemResult[2].store;
       var bestBuyPriceThird = bestbuyItemResult[2].price;
    
-      // Pushing Best Buy Results to table.
-      //Push result to firebase database.
+      //Pushing Best Buy Results to table.
+     // Push result to firebase database.
       database.ref().push({
         bestBuyItem: bestBuyItem,
         bestBuyStore: bestBuyStore,
@@ -184,7 +226,7 @@ database.ref().on("child_added", function (childSnapshot) {
   console.log(childSnapshot.val().bestBuyPriceThird);
 
 
-  // displays data to table body
+  //displays data to table body
   bestBuyItem = childSnapshot.val().bestBuyItem;
   bestBuyStore = childSnapshot.val().bestBuyStore;
   bestBuyPrice = childSnapshot.val().bestBuyPrice;
@@ -196,29 +238,27 @@ database.ref().on("child_added", function (childSnapshot) {
   bestBuyPriceThird = childSnapshot.val().bestBuyPriceThird;
 
 
-$("#tableBody").append("<tr><td>" + bestBuyItem + "</td><td>" + bestBuyStore + "</td><td>" + bestBuyPrice + "</td></tr>" + "<tr><td>" + bestBuyItemSecond + "</td><td>"  + bestBuyStoreSecond + "</td><td>" + bestBuyPriceSecond + "</td></tr>" + "<tr><td>" + bestBuyItemThird + "</td><td>"  + bestBuyStoreThird + "</td><td>" + bestBuyPriceThird + "</td><tr>")})
+$("#tableBody").append("<tr><td>" + bestBuyItem + "</td><td>" + bestBuyStore + "</td><td>" + bestBuyPrice + "</td></tr>" + "<tr><td>" + bestBuyItemSecond + "</td><td>"  + bestBuyStoreSecond + "</td><td>" + bestBuyPriceSecond + "</td></tr>" + "<tr><td>" + bestBuyItemThird + "</td><td>"  + bestBuyStoreThird + "</td><td>" + bestBuyPriceThird + "</td><tr>")
+})
 
 
+// /ONCLICK BUTTONS
 // onclick for create new list
-// $("#new-list").on("click", function (event) {
-//   event.preventDefault();
+$("#new-list").on("click", function (event) {
+  $("#tableBody tr").remove();
+  event.preventDefault();
+});
 
-    $("#new-list").on("click", function (event) {
-        $("#tableBody").find("tr:not(:first)").remove();
-    });
-
-// function DeleteRows() {
-//   var rowCount = tableBody.rows.length;
-//   for (var i = rowCount - 1; i > 0; i--) {
-//     tableBody.deleteRow(i);
-//   }
-// }
+    // $("#new-list").on("click", function (event) {
+    //     $("#tableBody").find("tr:not(:first)").remove();
+    // });
 
 
 //onclick function that captures the users results and passes them through them
 // through bestBuyKeywordcfig
 
 $(".btn-submit").on("click", function (event) {
+  document.getElementById("tableBody").deleteRow(0);
   event.preventDefault();
 
   //collects user search item and stores them in an item array
@@ -276,14 +316,144 @@ var walmartURL =
       method: "GET",
       
     })
-      .then(function (response) {
-        var results = response;
-        console.log(results);
+      
+    .then(function (response) {
+      console.log(response);
+      var results = response.items;
+      console.log(response.items[0]);
+      console.log(results);
+
+   
+      for (i = 0; i < results.length; i++) {
+
+        let resultItems = {
+          item: results[i].name,
+          store: "Walmart",
+          price: results[i].msrp,
+        };
+      
+        
+        walmartItemResult.push(resultItems);
+        console.log("script.js-294", walmartItemResult);
+        walmartDisplay();
+      };
+        //console.log(walmartItemResult[walmartItemResult.length - 1]);
+      //bestPrice();
+        //Table Results
+      var walmartItem = walmartItemResult[0].item;
+      var walmartPrice = walmartItemResult[0].price;
+      var walmartItemSecond = walmartItemResult[1].name;
+      var walmartPriceSecond = walmartItemResult[1].salesPrice;
+      var walmartItemThird = walmartItemResult[2].name;
+      var walmartPriceThird = walmartItemResult[0].salesPrice;
+      
+      console.log(walmartItem);
+      database.ref().push({
+        walmartItem: walmartItem,
+        walmartPrice: walmartPrice,
+        walmartItemSecond: walmartItemSecond,
+        walmartPriceSecond: walmartPriceSecond,
+        walmartItemThird:  walmartItemThird,
+        walmartPriceThird: walmartPriceThird,
+        
+      });
+      database.ref().on("child_added", function (childSnapshot){
+
+        console.log(childSnapshot.val().walmartItem);
+        walmartItem = childSnapshot.val().walmartItem;
+        walmartPrice = childSnapshot.val().walmartPrice;
+        walmartItemSecond = childSnapshot.val().walmartItemSecond;
+        walmartPriceSecond= childSnapshot.val().walmartPriceSecond;
+        walmartItemThird= childSnapshot.val().walmartItemThird;
+        walmartPriceThird= childSnapshot.val().walmartPriceThird;
+        console.log(walmartPrice);
+
+        $("#tableBody").append("<tr><td>"
+         + walmartItem + "</td><td>"
+          + "Walmart" + "</td><td>" 
+          + walmartPrice + "</td></tr>" + "<tr><td>"
+         + walmartItemSecond + "</td><td>"  
+         + "Walmart" + "</td><td>"
+          + walmartPriceSecond + "</td></tr>" + "<tr><td>" 
+          + walmartItemThird + "</td><td>" 
+          + "Walmart" + "</td><td>"
+           + walmartPriceThird + "</td><tr>")
+      });
+      
       }); 
 
+    
+      database.ref().on("child_added", function (childSnapshot){
+
+        console.log(childSnapshot.val().walmartItem);
+        walmartItem = childSnapshot.val().walmartItem;
+        walmartPrice = childSnapshot.val().walmartPrice;
+        walmartItemSecond = childSnapshot.val().walmartItemSecond;
+        walmartPriceSecond= childSnapshot.val().walmartPriceSecond;
+        walmartItemThird= childSnapshot.val().walmartItemThird;
+        walmartPriceThird= childSnapshot.val().walmartPriceThird;
+        console.log(walmartPrice);
+
+        $("#tableBody").append("<tr><td>"
+         + walmartItem + "</td><td>"
+          + "Walmart" + "</td><td>" 
+          + walmartPrice + "</td></tr>" + "<tr><td>"
+         + walmartItemSecond + "</td><td>"  
+         + "Walmart" + "</td><td>"
+          + walmartPriceSecond + "</td></tr>" + "<tr><td>" 
+          + walmartItemThird + "</td><td>" 
+          + "Walmart" + "</td><td>"
+           + walmartPriceThird + "</td><tr>")
+           
+      });
+    
+
+    
   
 });
-console.log(bestBuyItemSKU)
+
+function walmartDisplay(){
+  var walmartItem = walmartItemResult[0].item;
+  var walmartPrice = walmartItemResult[0].price;
+  var walmartItemSecond = walmartItemResult[1].name;
+  var walmartPriceSecond = walmartItemResult[1].salesPrice;
+  var walmartItemThird = walmartItemResult[2].name;
+  var walmartPriceThird = walmartItemResult[0].salesPrice;
+  
+  console.log(walmartItem);
+  database.ref().push({
+    walmartItem: walmartItem,
+    walmartPrice: walmartPrice,
+    walmartItemSecond: walmartItemSecond,
+    walmartPriceSecond: walmartPriceSecond,
+    walmartItemThird:  walmartItemThird,
+    walmartPriceThird: walmartPriceThird,
+    
+  });
+  database.ref().on("child_added", function (childSnapshot){
+
+    console.log(childSnapshot.val().walmartItem);
+    walmartItem = childSnapshot.val().walmartItem;
+    walmartPrice = childSnapshot.val().walmartPrice;
+    walmartItemSecond = childSnapshot.val().walmartItemSecond;
+    walmartPriceSecond= childSnapshot.val().walmartPriceSecond;
+    walmartItemThird= childSnapshot.val().walmartItemThird;
+    walmartPriceThird= childSnapshot.val().walmartPriceThird;
+    console.log(walmartPrice);
+
+    $("#tableBody").append("<tr><td>"
+     + walmartItem + "</td><td>"
+      + "Walmart" + "</td><td>" 
+      + walmartPrice + "</td></tr>" + "<tr><td>"
+     + walmartItemSecond + "</td><td>"  
+     + "Walmart" + "</td><td>"
+      + walmartPriceSecond + "</td></tr>" + "<tr><td>" 
+      + walmartItemThird + "</td><td>" 
+      + "Walmart" + "</td><td>"
+       + walmartPriceThird + "</td><tr>")
+  });
+};
+//console.log(bestBuyItemSKU)
 
 
 
@@ -306,6 +476,7 @@ $("#zip-code-btn").on("click", function (event) {
     // After the data comes back from the API
     .then(function (response) {
       console.log(response);
+
       // Storing an array of results in the results variable
       userLocationInfo.latitude = response.results[0].geometry.location.lat;
       console.log(userLocationInfo.latitude);
@@ -314,18 +485,6 @@ $("#zip-code-btn").on("click", function (event) {
     });
 
 });
-
-//document load clear table
-$(document).ready(function() {  
-  $("#tableBody").find("tr:not(:first)").remove();
-  });
-
-  //modal for when results arent returned
-//   $(document).on('click', '.trigger', function (event) {
-//     event.preventDefault();
-//     if (bestbuyItemResult = undefined)
-//     $('#modal').iziModal('open');
-// });
 
 //library addtion for interactive map
 //mapquest option
@@ -417,31 +576,4 @@ let directionsControl = L.mapquest.directionsControl({
     interactive: true,
   }
 }).addTo(map);
-
-
-
-// // Get the modal
-// var modal = document.getElementById('myModal');
-
-// // Get the button that opens the modal
-// var btn = document.getElementById("myBtn");
-
-// // Get the <span> element that closes the modal
-// var span = document.getElementsByClassName("close")[0];
-
-// // When the user clicks the button, open the modal 
-// btn.onclick = function() {
-//   modal.style.display = "block";
-// }
-
-// // When the user clicks on <span> (x), close the modal
-// span.onclick = function() {
-//   modal.style.display = "none";
-// }
-
-// // When the user clicks anywhere outside of the modal, close it
-// window.onclick = function(event) {
-//   if (event.target == modal) {
-//     modal.style.display = "none";
-
-
+}
